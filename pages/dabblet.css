@@ -1,0 +1,17 @@
+div{
+background-image : linear-gradient(top,orange,white,white,green);
+position:absolute;
+top:50px;
+left:100px;
+transform:rotate(345deg);
+text-align:center;
+vertical-align:middle;
+border-radius:20px;
+color:blue;
+line-height:180px;
+font-size:18px;
+width:200px;
+height:200px;
+box-shadow:10px 10px 5px #ddd;
+
+}
