@@ -4,6 +4,36 @@
       <title>INFO</title>
    </head>
    <body style="background-color: black;">
+      <!-- Messenger Chat plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "104181708602182");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v13.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
       <h2></h2>
       <!-- heading 1 -->
       <h1 align="center" style="color: green; font-size:300%; " > $ WELCOME TO INFO.TXT</h1>
@@ -18,6 +48,4 @@
             For query -->  <a style="color: red;" href="mailto: adarshkrdubay@gmail.com">Contact me</a>
         
         </pre>
-<script type="text/javascript">function add_chatinline(){var hccid=51698940;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
-add_chatinline();</script>
    </body> 
