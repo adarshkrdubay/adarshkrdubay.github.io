@@ -1,54 +1,59 @@
-<!doctype html>
-<html lang=en>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset=UTF-8 />
-    <meta name=viewport content="width=device-width,initial-scale=1" />
-    <meta http-equiv=X-UA-Compatible content="ie=edge" />
-    <link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css
-        integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel=stylesheet>
-    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;700&display=swap" rel=stylesheet>
-    <link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
-    <script src=https://kit.fontawesome.com/3c09bcb51a.js></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     <title>AKD</title>
-    <link href="styles/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class=container>
-        <div class=row>
-            <div class="left-wrap col-12 col-md-5">
-                <div class=left>
-                    <p><span class=days></span><span class=small> days</span></p>
-                    <p><span class=hours></span><span class=small> hours</span></p>
-                    <p>&nbsp;&nbsp;<span class=minutes></span><span class=small> minutes</span></p>
-                    <p>&nbsp;&nbsp;<span class=seconds></span><span class=small> seconds</span></p>
-                </div>
-            </div>
-            <div class="col-12 col-md-7 right">
-                <div class=mainInfo>
-                    <h1>COMING SOON</h1>
-                    <p class=slogan>We are working on it </p>
-                </div>
-                <ul class=icon-list>
-                    <li class=icon><a class=twitter href=https://twitter.com/adarshkrdubay></a></li>
-                    <li class=icon><a class=facebook href=https://www.facebook.com/fb.adarshkrdubay/></a></li>
-                    <li class=icon><a class=instagram href=https://www.instagram.com/adarshkrdubay/></a></li>
-                    <li class=icon><a class=youtube href=https://www.youtube.com/@adarshkrdubay></a></li>
-                    <li class=icon><a class=github href=https://github.com/adarshkrdubay></a></li>
-                    <li class=icon><a class=stackoverflow href=https://stackoverflow.com/users/17235480/adarsh-kumar></a></li>
-                    <li class=icon><a class=medium href=https://adarshkrduaby.medium.com/></a></li>
-                    
+    <header>
+        <nav>
+            <div class="left">Adarsh's Portfolio</div>
+            <div class="right">
+                <ul>
+                    <li><a href="index.html" class="Selected">Home</a></li>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="project.html">Projects</a></li>
+                    <li><a href="Achivement.html">Achivement</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacme.html">Contact me</a></li>
                 </ul>
             </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="scripts/bundle.js"></script>
+        </nav>
+    </header>
+    <main>
+        <section class="firstsection">
+            <div class="firstsectionleft" >I'm <span class="myname">Adarsh</span> 
+            <div>I am a 
+                <span id="element"></span></div>
+            
+            </div>
+            
+            <div class="firstsectionright">
+                <img src="image/cyber-card.png" alt="">
+            </div>
+        </section>
+    </main>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['B.tech(CS) student .', 'Cyber-security student .',' CTF player .','B.tech(CS) student as well as Cyber-security student and a CTF player .'],
+            typeSpeed: 50,
+        });
+    </script>
+     <script type="text/javascript" src="scripts/bundle.js"></script>
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/21718159.js"></script> 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4980547678521504"
      crossorigin="anonymous"></script>
  
+
 </body>
 
 </html>
